@@ -13,6 +13,8 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
+    // hide top bar
+    self.navigationController?.setNavigationBarHidden(true, animated: false)
     // add photo library button
     addPhotoLibraryButton()
   }
@@ -50,8 +52,10 @@ extension HomeViewController: UIImagePickerControllerDelegate {
     }
     
     dismiss(animated: true) {
-      print(selectedPhoto.size)
+      // display image
+      self.navigationController?.pushViewController(DisplayViewController(photo: selectedPhoto), animated: true)
     }
   }
 }
+
 

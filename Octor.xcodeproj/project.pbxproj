@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0BC4D84323B60D5900647EA9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4D84223B60D5900647EA9 /* HomeViewController.swift */; };
+		0BEA893623B63A100015AF64 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA893523B63A100015AF64 /* DisplayViewController.swift */; };
 		46E8DF488CEBC1E02C80152F /* Pods_Octor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C71CAE8362299AA6D360C437 /* Pods_Octor.framework */; };
 		B8716EED20D0D9B600ACE7D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8716EEC20D0D9B600ACE7D3 /* AppDelegate.swift */; };
 		B8716EF420D0D9B800ACE7D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8716EF320D0D9B800ACE7D3 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 
 /* Begin PBXFileReference section */
 		0BC4D84223B60D5900647EA9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		0BEA893523B63A100015AF64 /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
 		4B7BAD648B794EB239166903 /* Pods-Octor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Octor.debug.xcconfig"; path = "Target Support Files/Pods-Octor/Pods-Octor.debug.xcconfig"; sourceTree = "<group>"; };
 		A78D37B5048C4482C254D6A6 /* Pods-Octor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Octor.release.xcconfig"; path = "Target Support Files/Pods-Octor/Pods-Octor.release.xcconfig"; sourceTree = "<group>"; };
 		B8716EE920D0D9B600ACE7D3 /* Octor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Octor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +44,7 @@
 			isa = PBXGroup;
 			children = (
 				0BC4D84223B60D5900647EA9 /* HomeViewController.swift */,
+				0BEA893523B63A100015AF64 /* DisplayViewController.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -52,7 +55,6 @@
 				4B7BAD648B794EB239166903 /* Pods-Octor.debug.xcconfig */,
 				A78D37B5048C4482C254D6A6 /* Pods-Octor.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -210,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B8716EED20D0D9B600ACE7D3 /* AppDelegate.swift in Sources */,
+				0BEA893623B63A100015AF64 /* DisplayViewController.swift in Sources */,
 				0BC4D84323B60D5900647EA9 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
