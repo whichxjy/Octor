@@ -9,14 +9,23 @@ import MobileCoreServices
 class HomeViewController: UIViewController {
   
   private var photoLibraryButton: UIButton!
+  private var imagePicker: UIImagePickerController!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     // hide top bar
     self.navigationController?.setNavigationBarHidden(true, animated: false)
+    // init image picker
+    initImagePicker()
     // add photo library button
     addPhotoLibraryButton()
+  }
+  
+  private func initImagePicker() {
+    imagePicker = UIImagePickerController()
+    imagePicker.delegate = self
+    imagePicker.mediaTypes = [kUTTypeImage as String]
   }
   
   private func addPhotoLibraryButton() {
@@ -29,10 +38,7 @@ class HomeViewController: UIViewController {
   }
   
   @objc private func buttonAction(sender: UIButton!) {
-    let imagePicker = UIImagePickerController()
-    imagePicker.delegate = self
     imagePicker.sourceType = .photoLibrary
-    imagePicker.mediaTypes = [kUTTypeImage as String]
     self.present(imagePicker, animated: true)
   }
 }
