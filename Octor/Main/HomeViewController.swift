@@ -58,7 +58,7 @@ extension HomeViewController: UIImagePickerControllerDelegate {
     }
     
     dismiss(animated: true) {
-      // display image
+      // display photo
       self.navigationController?.pushViewController(DisplayViewController(photo: selectedPhoto), animated: true)
     }
   }
