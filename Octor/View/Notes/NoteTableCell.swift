@@ -7,7 +7,7 @@ import UIKit
 
 class NoteTableCell: UITableViewCell {
   
-  static let cellID = "NoteTableCell"
+  public static let cellID = "NoteTableCell"
   
   private var customBackgroundView: UIView!
   private var titleLabel: UILabel!
@@ -28,7 +28,6 @@ class NoteTableCell: UITableViewCell {
       self.subtitleLabel.text = "Edited on \(formatter.string(from: note.lastEdited))"
     }
   }
-  
   
   deinit {
     NotificationCenter.default.removeObserver(self)
