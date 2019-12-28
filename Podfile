@@ -4,4 +4,5 @@ inhibit_all_warnings!
 target 'Octor' do
   use_frameworks!
   pod 'TesseractOCRiOS'
+  pod 'SQLite.swift', '~> 0.12.0'
 end

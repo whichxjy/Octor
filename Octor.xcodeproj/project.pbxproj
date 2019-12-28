@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0B2ED48523B6F02700C6AC99 /* TextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED48423B6F02700C6AC99 /* TextRecognizer.swift */; };
+		0B2ED48923B7085700C6AC99 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED48823B7085700C6AC99 /* NotesViewController.swift */; };
+		0B2ED48C23B70C0600C6AC99 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED48B23B70C0600C6AC99 /* DataSource.swift */; };
+		0B2ED48E23B70C2800C6AC99 /* NoteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED48D23B70C2800C6AC99 /* NoteDataSource.swift */; };
+		0B2ED49023B7181600C6AC99 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED48F23B7181600C6AC99 /* Note.swift */; };
+		0B2ED49223B7182C00C6AC99 /* Writable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED49123B7182C00C6AC99 /* Writable.swift */; };
+		0B2ED49423B71A9D00C6AC99 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED49323B71A9D00C6AC99 /* NoteDetailController.swift */; };
+		0B2ED49623B71AFE00C6AC99 /* NoteTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED49523B71AFE00C6AC99 /* NoteTableCell.swift */; };
 		0B31563D23B65F27003330DE /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 0B31563C23B65F27003330DE /* tessdata */; };
 		0BC4D84323B60D5900647EA9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC4D84223B60D5900647EA9 /* HomeViewController.swift */; };
 		0BEA893623B63A100015AF64 /* DisplayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEA893523B63A100015AF64 /* DisplayViewController.swift */; };
@@ -19,6 +26,13 @@
 
 /* Begin PBXFileReference section */
 		0B2ED48423B6F02700C6AC99 /* TextRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizer.swift; sourceTree = "<group>"; };
+		0B2ED48823B7085700C6AC99 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
+		0B2ED48B23B70C0600C6AC99 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		0B2ED48D23B70C2800C6AC99 /* NoteDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDataSource.swift; sourceTree = "<group>"; };
+		0B2ED48F23B7181600C6AC99 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		0B2ED49123B7182C00C6AC99 /* Writable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Writable.swift; sourceTree = "<group>"; };
+		0B2ED49323B71A9D00C6AC99 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
+		0B2ED49523B71AFE00C6AC99 /* NoteTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableCell.swift; sourceTree = "<group>"; };
 		0B31563C23B65F27003330DE /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		0BC4D84223B60D5900647EA9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		0BEA893523B63A100015AF64 /* DisplayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayViewController.swift; sourceTree = "<group>"; };
@@ -44,14 +58,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0B249C4F23B60C9E00BE7D34 /* Main */ = {
+		0B249C4F23B60C9E00BE7D34 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0B2ED49723B71D0900C6AC99 /* Notes */,
 				0BC4D84223B60D5900647EA9 /* HomeViewController.swift */,
 				0BEA893523B63A100015AF64 /* DisplayViewController.swift */,
 				0B2ED48423B6F02700C6AC99 /* TextRecognizer.swift */,
 			);
-			path = Main;
+			path = View;
+			sourceTree = "<group>";
+		};
+		0B2ED48A23B7099800C6AC99 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0B2ED48B23B70C0600C6AC99 /* DataSource.swift */,
+				0B2ED48D23B70C2800C6AC99 /* NoteDataSource.swift */,
+				0B2ED48F23B7181600C6AC99 /* Note.swift */,
+				0B2ED49123B7182C00C6AC99 /* Writable.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		0B2ED49723B71D0900C6AC99 /* Notes */ = {
+			isa = PBXGroup;
+			children = (
+				0B2ED48823B7085700C6AC99 /* NotesViewController.swift */,
+				0B2ED49323B71A9D00C6AC99 /* NoteDetailController.swift */,
+				0B2ED49523B71AFE00C6AC99 /* NoteTableCell.swift */,
+			);
+			path = Notes;
 			sourceTree = "<group>";
 		};
 		5EC4379CED2B951BF6F56722 /* Pods */ = {
@@ -93,7 +129,8 @@
 		B8716EEB20D0D9B600ACE7D3 /* Octor */ = {
 			isa = PBXGroup;
 			children = (
-				0B249C4F23B60C9E00BE7D34 /* Main */,
+				0B2ED48A23B7099800C6AC99 /* Model */,
+				0B249C4F23B60C9E00BE7D34 /* View */,
 				B8716EEC20D0D9B600ACE7D3 /* AppDelegate.swift */,
 				B8716EF320D0D9B800ACE7D3 /* Assets.xcassets */,
 				B8716EF520D0D9B800ACE7D3 /* LaunchScreen.storyboard */,
@@ -218,8 +255,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B2ED49423B71A9D00C6AC99 /* NoteDetailController.swift in Sources */,
+				0B2ED49223B7182C00C6AC99 /* Writable.swift in Sources */,
+				0B2ED48C23B70C0600C6AC99 /* DataSource.swift in Sources */,
 				0B2ED48523B6F02700C6AC99 /* TextRecognizer.swift in Sources */,
+				0B2ED48923B7085700C6AC99 /* NotesViewController.swift in Sources */,
+				0B2ED49023B7181600C6AC99 /* Note.swift in Sources */,
+				0B2ED49623B71AFE00C6AC99 /* NoteTableCell.swift in Sources */,
 				B8716EED20D0D9B600ACE7D3 /* AppDelegate.swift in Sources */,
+				0B2ED48E23B70C2800C6AC99 /* NoteDataSource.swift in Sources */,
 				0BEA893623B63A100015AF64 /* DisplayViewController.swift in Sources */,
 				0BC4D84323B60D5900647EA9 /* HomeViewController.swift in Sources */,
 			);
