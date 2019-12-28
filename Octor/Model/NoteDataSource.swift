@@ -20,10 +20,8 @@ class NoteDataSource: DataSource {
     // get all notes from db
     var noteList: [Note] = []
     for note in try! db.prepare(noteTable.order(lastEdited.desc)) {
-//      print(note[lastEdited])
       noteList.append(Note(id: note[id], content: note[content], lastEdited: note[lastEdited]))
     }
-//    noteList.sort(by: {$0.lastEdited.timeIntervalSinceNow > $1.lastEdited.timeIntervalSinceNow})
     return noteList
   }
   

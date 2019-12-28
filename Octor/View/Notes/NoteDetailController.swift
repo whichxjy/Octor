@@ -117,6 +117,7 @@ extension NoteDetailController: UITextViewDelegate {
     
     self.navigationItem.hidesBackButton = true
     
+    // display trash button and save button
     if let trashButton = self.trashButton, let doneButton = self.saveButton {
       self.navigationItem.rightBarButtonItems = [doneButton, trashButton]
     }
@@ -129,6 +130,7 @@ extension NoteDetailController: UITextViewDelegate {
     
     self.note?.content = textView.text
     
+    // display trash button
     if let trashButton = self.trashButton {
       self.navigationItem.rightBarButtonItems = [trashButton]
     }
