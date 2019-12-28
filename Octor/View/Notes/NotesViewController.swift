@@ -29,6 +29,8 @@ class NotesViewController: UIViewController {
   override func viewDidLoad() {
     initNavigationController()
     addNotesTableView()
+    // observe notes' change
+    NotificationCenter.default.addObserver(self, selector: #selector(notesDidUpdate), name: .noteDataChanged, object: nil)
   }
   
   // MARK: - Subviews
