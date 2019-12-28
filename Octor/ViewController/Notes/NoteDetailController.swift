@@ -18,6 +18,15 @@ class NoteDetailController: UIViewController {
   private var originalContent: String = ""
   private var shouldDelete: Bool = false
   
+  private lazy var alertController: UIAlertController = {
+    let alert = UIAlertController(title: "文字识别", message: nil, preferredStyle: .actionSheet)
+    // photo library
+    alert.addAction(UIAlertAction(title: "从相册中添加", style: .default) { (alert) -> Void in
+      print("photo")
+    })
+    return alert
+  }()
+  
   private let noteDataSource: NoteDataSource
   
   init(noteDataSource: NoteDataSource) {
@@ -31,7 +40,6 @@ class NoteDetailController: UIViewController {
   
   override func viewDidLoad() {
     self.view.backgroundColor = .black
-
     self.navigationItem.largeTitleDisplayMode = .never
     
     // init note
@@ -50,19 +58,38 @@ class NoteDetailController: UIViewController {
     self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
   }
   
-  // MARK: - Subviews
+  // MARK: - Camera Button
   
   func addCameraButton() {
-    cameraButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didTapDelete))
+    cameraButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didTapCamera))
   }
+  
+  @objc func didTapCamera() {
+    present(alertController, animated: true)
+  }
+  
+  // MARK: - Save Button
   
   func addSaveButton() {
     saveButton = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(didTapSave))
   }
   
+  @objc func didTapSave() {
+    self.textView.endEditing(true)
+  }
+  
+  // MARK: - Trash Button
+  
   func addTrashButton() {
     trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete))
   }
+  
+  @objc func didTapDelete() {
+    self.shouldDelete = true
+    self.navigationController?.popViewController(animated: true)
+  }
+  
+  // MARK: - Text View
   
   func addTextView() {
     textView = UITextView()
@@ -87,15 +114,6 @@ class NoteDetailController: UIViewController {
     textView.trailingAnchor.constraint(equalTo: self.view.readableContentGuide.trailingAnchor).isActive = true
   }
   
-  @objc func didTapSave() {
-    self.textView.endEditing(true)
-  }
-  
-  @objc func didTapDelete() {
-    self.shouldDelete = true
-    self.navigationController?.popViewController(animated: true)
-  }
-  
   override func viewWillDisappear(_ animated: Bool) {
     if self.textView.text.isEmpty || self.shouldDelete {
       self.note?.delete(dataSource: self.noteDataSource)
@@ -105,7 +123,6 @@ class NoteDetailController: UIViewController {
       guard self.originalContent != self.note?.content else {
         return
       }
-      
       self.note?.write(dataSource: self.noteDataSource)
     }
   }

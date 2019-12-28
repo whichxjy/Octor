@@ -48,11 +48,11 @@ class NoteDataSource: DataSource {
     let insert2 = noteTable.insert(id <- myNote2.id, content <- myNote2.content, lastEdited <- myNote2.lastEdited)
     try! db.run(insert2)
     
-    sleep(1)
-    
-    let myNote3 = Note(content: "hello3")
-    let insert3 = noteTable.insert(id <- myNote3.id, content <- myNote3.content, lastEdited <- myNote3.lastEdited)
-    try! db.run(insert3)
+//    sleep(1)
+//    
+//    let myNote3 = Note(content: "hello3")
+//    let insert3 = noteTable.insert(id <- myNote3.id, content <- myNote3.content, lastEdited <- myNote3.lastEdited)
+//    try! db.run(insert3)
   }
   
   func store<T>(object: T) {
