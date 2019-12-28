@@ -7,11 +7,16 @@ import TesseractOCR
 
 class TextRecognizer {
   
-  func recognize(_ image: UIImage) -> String? {
-    let scaledImage = image.scale(maxDimension: 1000) ?? image
-    let tesseract = G8Tesseract(language: "eng+fra")
+  private var tesseract: G8Tesseract!
+  
+  init() {
+    tesseract = G8Tesseract(language: "eng+fra")
     tesseract?.engineMode = .tesseractCubeCombined
     tesseract?.pageSegmentationMode = .auto
+  }
+  
+  func recognize(_ image: UIImage) -> String? {
+    let scaledImage = image.scale(maxDimension: 1000) ?? image
     tesseract?.image = scaledImage
     tesseract?.recognize()
     return tesseract?.recognizedText
