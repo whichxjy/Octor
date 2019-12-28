@@ -10,6 +10,7 @@ class HomeViewController: UIViewController {
   
   private var photoLibraryButton: UIButton!
   private var imagePicker: UIImagePickerController!
+  private var textRecognizer: TextRecognizer!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -20,6 +21,8 @@ class HomeViewController: UIViewController {
     initImagePicker()
     // add photo library button
     addPhotoLibraryButton()
+    // init text recognizer
+    textRecognizer = TextRecognizer()
   }
   
   private func initImagePicker() {
@@ -58,6 +61,7 @@ extension HomeViewController: UIImagePickerControllerDelegate {
     }
     
     dismiss(animated: true) {
+      self.textRecognizer.recognize(selectedPhoto)
       // display photo
       self.navigationController?.pushViewController(DisplayViewController(photo: selectedPhoto), animated: true)
     }
