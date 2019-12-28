@@ -35,8 +35,9 @@ class NotesViewController: UIViewController {
   
   func initNavigationController() {
     self.navigationController?.navigationBar.barStyle = .black
-    self.navigationController?.navigationBar.tintColor = UIColor.white
+    self.navigationController?.navigationBar.tintColor = .white
     self.navigationController?.navigationBar.prefersLargeTitles = true
+    self.navigationItem.largeTitleDisplayMode = .automatic
     self.navigationItem.title = "笔记"
     // add compose button
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapCompose))
@@ -58,10 +59,10 @@ class NotesViewController: UIViewController {
     self.view.addSubview(notesTableView)
     
     // layout
+    notesTableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+    notesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     notesTableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
     notesTableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-    notesTableView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-    notesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
   }
   
   @objc func didTapCompose() {
