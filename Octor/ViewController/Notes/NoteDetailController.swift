@@ -10,6 +10,7 @@ class NoteDetailController: UIViewController {
   private var textView: UITextView!
   private var saveButton: UIBarButtonItem!
   private var trashButton: UIBarButtonItem!
+  private var cameraButton: UIBarButtonItem!
   
   public var note: Note? = nil
   private let placeholder = "请输入文字..."
@@ -31,7 +32,6 @@ class NoteDetailController: UIViewController {
   override func viewDidLoad() {
     self.view.backgroundColor = .black
 
-    self.navigationItem.title = "修改"
     self.navigationItem.largeTitleDisplayMode = .never
     
     // init note
@@ -41,14 +41,20 @@ class NoteDetailController: UIViewController {
     // original content to show
     self.originalContent = self.note?.content ?? ""
     // subviews
+    addCameraButton()
     addSaveButton()
     addTrashButton()
+    
     addTextView()
-    // only trash button
-    self.navigationItem.rightBarButtonItems = [trashButton]
+    // display camera button trash button
+    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
   }
   
   // MARK: - Subviews
+  
+  func addCameraButton() {
+    cameraButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didTapDelete))
+  }
   
   func addSaveButton() {
     saveButton = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(didTapSave))
@@ -117,10 +123,8 @@ extension NoteDetailController: UITextViewDelegate {
     
     self.navigationItem.hidesBackButton = true
     
-    // display trash button and save button
-    if let trashButton = self.trashButton, let doneButton = self.saveButton {
-      self.navigationItem.rightBarButtonItems = [doneButton, trashButton]
-    }
+    // display camera button, trash button and save button
+    self.navigationItem.rightBarButtonItems = [saveButton, trashButton, cameraButton]
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
@@ -130,10 +134,8 @@ extension NoteDetailController: UITextViewDelegate {
     
     self.note?.content = textView.text
     
-    // display trash button
-    if let trashButton = self.trashButton {
-      self.navigationItem.rightBarButtonItems = [trashButton]
-    }
+    // display camera button and trash button
+    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
     
     self.navigationItem.hidesBackButton = false
   }
