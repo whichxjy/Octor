@@ -7,11 +7,11 @@ import UIKit
 
 class DisplayViewController: UIViewController {
   
-  private var imageView: UIImageView!
-  private var photo: UIImage!
+  private var textView: UITextView!
+  private var text: String!
 
-  init(photo: UIImage) {
-    self.photo = photo
+  init(text: String?) {
+    self.text = text
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -24,15 +24,15 @@ class DisplayViewController: UIViewController {
     view.backgroundColor = .white
     // show top bar
     self.navigationController?.setNavigationBarHidden(false, animated: false)
-    // add image view
-    addImageView()
+    // add text view
+    addTextView()
   }
   
-  private func addImageView() {
-    imageView = UIImageView(frame: CGRect(x: 0, y: 50, width: 200, height: 200))
-    imageView.center.x = self.view.center.x
-    imageView.image = self.photo
-    self.view.addSubview(imageView)
+  private func addTextView() {
+    textView = UITextView(frame: CGRect(x: 0, y: 50, width: 200, height: 200))
+    textView.center.x = self.view.center.x
+    textView.text = self.text
+    self.view.addSubview(textView)
   }
   
 }
