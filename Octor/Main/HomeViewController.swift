@@ -61,7 +61,7 @@ extension HomeViewController: UIImagePickerControllerDelegate {
     }
     
     dismiss(animated: true) {
-      let resultText = self.textRecognizer.recognize(selectedPhoto)
+      let resultText = self.textRecognizer.recognize(selectedPhoto)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
       // display photo
       self.navigationController?.pushViewController(DisplayViewController(text: resultText), animated: true)
     }
