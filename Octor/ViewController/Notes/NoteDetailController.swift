@@ -9,7 +9,6 @@ import MobileCoreServices
 class NoteDetailController: UIViewController {
   
   private var textView: UITextView!
-  private var saveButton: UIBarButtonItem!
   private var trashButton: UIBarButtonItem!
   private var cameraButton: UIBarButtonItem!
   
@@ -65,7 +64,9 @@ class NoteDetailController: UIViewController {
     if self.note == nil {
       self.note = Note(content: "")
     }
-    
+  
+    setupBackButton()
+
     // init image picker
     initImagePicker()
     
@@ -73,7 +74,6 @@ class NoteDetailController: UIViewController {
     self.originalContent = self.note?.content ?? ""
     // subviews
     addCameraButton()
-    addSaveButton()
     addTrashButton()
     addTextView()
     // display camera button trash button
@@ -99,14 +99,15 @@ class NoteDetailController: UIViewController {
     present(ocrAlertController, animated: true)
   }
   
-  // MARK: - Save Button
+  // MARK: - Back Button
   
-  func addSaveButton() {
-    saveButton = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(didTapSave))
+  func setupBackButton() {
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "完成", style: .plain, target: self, action: #selector(saveAndExit))
   }
   
-  @objc func didTapSave() {
+  @objc func saveAndExit() {
     self.textView.endEditing(true)
+    self.navigationController?.popViewController(animated: true)
   }
   
   // MARK: - Trash Button
@@ -169,10 +170,8 @@ extension NoteDetailController: UITextViewDelegate {
       textView.text = ""
     }
     
-    self.navigationItem.hidesBackButton = true
-    
     // display camera button, trash button and save button
-    self.navigationItem.rightBarButtonItems = [saveButton, trashButton, cameraButton]
+    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
