@@ -14,7 +14,7 @@ class NoteDetailController: UIViewController {
   private var cameraButton: UIBarButtonItem!
   
   private var imagePicker: UIImagePickerController!
-  private var textRecognizer: TextRecognizer!
+  private lazy var textRecognizer: TextRecognizer = TextRecognizer()
   
   public var note: Note? = nil
   private let placeholder = "请输入文字..."
@@ -74,8 +74,6 @@ class NoteDetailController: UIViewController {
     addSaveButton()
     addTrashButton()
     addTextView()
-    // init text recognizer
-    textRecognizer = TextRecognizer()
     // display camera button trash button
     self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
     // show keyboard
