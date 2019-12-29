@@ -1,5 +1,6 @@
 PODS:
   - GPUImage (0.1.7)
+  - IQKeyboardManagerSwift (6.5.4)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
@@ -7,20 +8,23 @@ PODS:
 
 DEPENDENCIES:
   - GPUImage
+  - IQKeyboardManagerSwift
   - SQLite.swift (~> 0.12.0)
   - TesseractOCRiOS
 
 SPEC REPOS:
   trunk:
     - GPUImage
+    - IQKeyboardManagerSwift
     - SQLite.swift
     - TesseractOCRiOS
 
 SPEC CHECKSUMS:
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  IQKeyboardManagerSwift: 2dde0fc70110e8eac7ccce2a46fdbec6a850b414
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   TesseractOCRiOS: 2c189465f86abb030d0c5141c90da9705b647854
 
-PODFILE CHECKSUM: 862ffb9a78cb15490e2afaf5b86bf8bdd10da1af
+PODFILE CHECKSUM: 2493afa31f91b10fb71974d6ae5274a2dd3fc665
 
 COCOAPODS: 1.8.4
