@@ -18,6 +18,7 @@ class CameraViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationController?.navigationBar.topItem?.title = "返回"
     setupCamera()
     addTakePhotoButton()
   }
