@@ -73,12 +73,13 @@ class NoteDetailController: UIViewController {
     addCameraButton()
     addSaveButton()
     addTrashButton()
-    
     addTextView()
     // init text recognizer
     textRecognizer = TextRecognizer()
     // display camera button trash button
     self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
+    // show keyboard
+    textView.becomeFirstResponder()
   }
   
   private func initImagePicker() {
@@ -227,6 +228,7 @@ extension NoteDetailController: CameraPhotoDelegate {
   
   func onCameraPhotoReady(image: UIImage) {
     self.recognizeAndAppend(image: image)
+    textView.becomeFirstResponder()
   }
   
 }
