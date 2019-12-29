@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B13C30123B878D10098A6C8 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B13C30023B878D10098A6C8 /* CameraViewController.swift */; };
 		0B2ED48523B6F02700C6AC99 /* TextRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED48423B6F02700C6AC99 /* TextRecognizer.swift */; };
 		0B2ED48923B7085700C6AC99 /* NotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED48823B7085700C6AC99 /* NotesViewController.swift */; };
 		0B2ED48C23B70C0600C6AC99 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED48B23B70C0600C6AC99 /* DataSource.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B13C30023B878D10098A6C8 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		0B2ED48423B6F02700C6AC99 /* TextRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextRecognizer.swift; sourceTree = "<group>"; };
 		0B2ED48823B7085700C6AC99 /* NotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesViewController.swift; sourceTree = "<group>"; };
 		0B2ED48B23B70C0600C6AC99 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				0B2ED49723B71D0900C6AC99 /* Notes */,
+				0B13C30023B878D10098A6C8 /* CameraViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0B2ED49423B71A9D00C6AC99 /* NoteDetailController.swift in Sources */,
+				0B13C30123B878D10098A6C8 /* CameraViewController.swift in Sources */,
 				0B2ED49223B7182C00C6AC99 /* Writable.swift in Sources */,
 				0B2ED48C23B70C0600C6AC99 /* DataSource.swift in Sources */,
 				0B2ED48523B6F02700C6AC99 /* TextRecognizer.swift in Sources */,

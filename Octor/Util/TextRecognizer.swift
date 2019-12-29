@@ -25,7 +25,7 @@ class TextRecognizer {
   }
 }
 
-// MARK: - UIImage extension
+// MARK: - UIImage Extension
 
 extension UIImage {
   
