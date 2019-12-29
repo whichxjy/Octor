@@ -215,7 +215,6 @@ extension NoteDetailController: CameraPhotoDelegate {
   
   func onCameraPhotoReady(image: UIImage) {
     self.recognizeAndAppend(image: image)
-    textView.becomeFirstResponder()
   }
   
 }
