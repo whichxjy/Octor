@@ -24,9 +24,14 @@ class NoteDetailController: UIViewController {
   
   private lazy var ocrAlertController: UIAlertController = {
     let alert = UIAlertController(title: "文字识别", message: nil, preferredStyle: .actionSheet)
+    // camera photo
+    alert.addAction(UIAlertAction(title: "拍照", style: .default) { (alert) -> Void in
+      let cameraViewController = CameraViewController()
+      cameraViewController.delegate = self
+      self.navigationController?.pushViewController(cameraViewController, animated: true)
+    })
     // photo library
     alert.addAction(UIAlertAction(title: "从相册中添加", style: .default) { (alert) -> Void in
-      self.imagePicker.sourceType = .photoLibrary
       self.present(self.imagePicker, animated: true)
     })
     return alert
@@ -78,6 +83,7 @@ class NoteDetailController: UIViewController {
   
   private func initImagePicker() {
     imagePicker = UIImagePickerController()
+    imagePicker.sourceType = .photoLibrary
     imagePicker.delegate = self
     imagePicker.mediaTypes = [kUTTypeImage as String]
   }
@@ -181,6 +187,18 @@ extension NoteDetailController: UITextViewDelegate {
     self.navigationItem.hidesBackButton = false
   }
   
+  func recognizeAndAppend(image: UIImage) {
+    let resultText = self.textRecognizer.recognize(image)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+    // check if the result text is empty
+    if (resultText.filter { !$0.isNewline && !$0.isWhitespace } == "") {
+      self.present(self.failAlertController, animated: true, completion: nil)
+    }
+    else {
+      // append result text to the content of current note
+      self.textView.text.append(resultText)
+    }
+  }
+  
 }
 
 // MARK: - UINavigationControllerDelegate
@@ -198,17 +216,17 @@ extension NoteDetailController: UIImagePickerControllerDelegate {
     }
     
     dismiss(animated: true) {
-      let resultText = self.textRecognizer.recognize(selectedPhoto)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-      // check if the result text is empty
-      if (resultText.filter { !$0.isNewline && !$0.isWhitespace } == "") {
-        self.present(self.failAlertController, animated: true, completion: nil)
-      }
-      else {
-        // append result text to the content of current note
-        self.textView.text.append(resultText)
-      }
+      self.recognizeAndAppend(image: selectedPhoto)
     }
   }
 }
 
+// MARK: - CameraPhotoDelegate
 
+extension NoteDetailController: CameraPhotoDelegate {
+  
+  func onCameraPhotoReady(image: UIImage) {
+    self.recognizeAndAppend(image: image)
+  }
+  
+}

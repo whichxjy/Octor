@@ -14,6 +14,8 @@ class CameraViewController: UIViewController {
   private var stillImageOutput: AVCapturePhotoOutput!
   private var videoPreviewLayer: AVCaptureVideoPreviewLayer!
   
+  public weak var delegate: CameraPhotoDelegate?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupCamera()
@@ -84,7 +86,8 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
     let photoAlertController = UIAlertController(title: "当前图片", message: nil, preferredStyle: .alert)
     photoAlertController.addImage(image: image)
     photoAlertController.addAction(UIAlertAction(title: "识别文字", style: .default) { (alert) -> Void in
-      
+      self.delegate?.onCameraPhotoReady(image: image)
+      self.navigationController?.popViewController(animated: true)
     })
     photoAlertController.addAction(UIAlertAction(title: "丢弃", style: .cancel) { (alert) -> Void in
       
@@ -111,7 +114,7 @@ extension UIAlertController {
       let left = (maxSize.width - scaledImage.size.width) / 2
       scaledImage = scaledImage?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -left, bottom: 0, right: 0))
     }
-
+    
     imageAction.setValue(scaledImage.withRenderingMode(.alwaysOriginal), forKey: "image")
     self.addAction(imageAction)
   }
