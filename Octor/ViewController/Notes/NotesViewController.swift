@@ -27,6 +27,7 @@ class NotesViewController: UIViewController {
   }
   
   override func viewDidLoad() {
+    self.view.backgroundColor = Theme.backgroundColor
     initNavigationController()
     addNotesTableView()
     // observe notes' change
@@ -40,7 +41,7 @@ class NotesViewController: UIViewController {
     self.navigationController?.navigationBar.tintColor = .white
     self.navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationItem.largeTitleDisplayMode = .automatic
-    self.navigationItem.title = "全部笔记"
+    self.navigationItem.title = "笔记"
     // add compose button
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapCompose))
   }
@@ -101,6 +102,16 @@ extension NotesViewController: UITableViewDelegate {
     let noteDetailController = NoteDetailController(noteDataSource: self.noteDataSource)
     noteDetailController.note = self.notes[indexPath.row]
     self.navigationController?.pushViewController(noteDetailController, animated: true)
+  }
+  
+  func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    
+    let deleteAction = UITableViewRowAction(style: .default, title: "删除") { (rowAction, indexPath) in
+      self.notes[indexPath.row].delete(dataSource: self.noteDataSource)
+    }
+    deleteAction.backgroundColor = .red
+    
+    return [deleteAction]
   }
   
 }

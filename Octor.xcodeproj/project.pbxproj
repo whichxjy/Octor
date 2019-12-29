@@ -18,6 +18,7 @@
 		0B2ED49423B71A9D00C6AC99 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED49323B71A9D00C6AC99 /* NoteDetailController.swift */; };
 		0B2ED49623B71AFE00C6AC99 /* NoteTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED49523B71AFE00C6AC99 /* NoteTableCell.swift */; };
 		0B31563D23B65F27003330DE /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 0B31563C23B65F27003330DE /* tessdata */; };
+		0BC3BD9823B944F60058BB70 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC3BD9723B944F60058BB70 /* Theme.swift */; };
 		46E8DF488CEBC1E02C80152F /* Pods_Octor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C71CAE8362299AA6D360C437 /* Pods_Octor.framework */; };
 		B8716EED20D0D9B600ACE7D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8716EEC20D0D9B600ACE7D3 /* AppDelegate.swift */; };
 		B8716EF420D0D9B800ACE7D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8716EF320D0D9B800ACE7D3 /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		0B2ED49323B71A9D00C6AC99 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		0B2ED49523B71AFE00C6AC99 /* NoteTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableCell.swift; sourceTree = "<group>"; };
 		0B31563C23B65F27003330DE /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		0BC3BD9723B944F60058BB70 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		4B7BAD648B794EB239166903 /* Pods-Octor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Octor.debug.xcconfig"; path = "Target Support Files/Pods-Octor/Pods-Octor.debug.xcconfig"; sourceTree = "<group>"; };
 		A78D37B5048C4482C254D6A6 /* Pods-Octor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Octor.release.xcconfig"; path = "Target Support Files/Pods-Octor/Pods-Octor.release.xcconfig"; sourceTree = "<group>"; };
 		B8716EE920D0D9B600ACE7D3 /* Octor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Octor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,7 @@
 			children = (
 				0B2ED49723B71D0900C6AC99 /* Notes */,
 				0B13C30423B8E3C90098A6C8 /* Camera */,
+				0BC3BD9723B944F60058BB70 /* Theme.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -280,6 +283,7 @@
 				0B2ED48923B7085700C6AC99 /* NotesViewController.swift in Sources */,
 				0B2ED49023B7181600C6AC99 /* Note.swift in Sources */,
 				0B2ED49623B71AFE00C6AC99 /* NoteTableCell.swift in Sources */,
+				0BC3BD9823B944F60058BB70 /* Theme.swift in Sources */,
 				B8716EED20D0D9B600ACE7D3 /* AppDelegate.swift in Sources */,
 				0B2ED48E23B70C2800C6AC99 /* NoteDataSource.swift in Sources */,
 			);

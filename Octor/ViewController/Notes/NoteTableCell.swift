@@ -23,9 +23,8 @@ class NoteTableCell: UITableViewCell {
       self.titleLabel.text = String(note.content.split(separator: "\n")[0])
       // set subtitle with date
       let formatter = DateFormatter()
-      formatter.dateStyle = .medium
-      formatter.timeStyle = .short
-      self.subtitleLabel.text = "Edited on \(formatter.string(from: note.lastEdited))"
+      formatter.dateFormat = "yyyy/M/dd h:mm"
+      self.subtitleLabel.text = "\(formatter.string(from: note.lastEdited))"
     }
   }
   
@@ -53,7 +52,7 @@ class NoteTableCell: UITableViewCell {
   func addCustomBackgroundView() {
     customBackgroundView = UIView()
     customBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-    customBackgroundView.backgroundColor = UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1.0)
+    customBackgroundView.backgroundColor = UIColor(red: 64 / 255, green: 64 / 255, blue: 64 / 255, alpha: 1.0)
     customBackgroundView.layer.cornerRadius = 10
     customBackgroundView.clipsToBounds = true
     self.contentView.addSubview(customBackgroundView)
@@ -80,8 +79,8 @@ class NoteTableCell: UITableViewCell {
   }
   
   override func layoutSubviews() {
-    self.customBackgroundView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 4).isActive = true
-    self.customBackgroundView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -4).isActive = true
+    self.customBackgroundView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
+    self.customBackgroundView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
     self.customBackgroundView.leadingAnchor.constraint(equalTo: self.contentView.readableContentGuide.leadingAnchor).isActive = true
     self.customBackgroundView.trailingAnchor.constraint(equalTo: self.contentView.readableContentGuide.trailingAnchor).isActive = true
     
