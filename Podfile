@@ -5,5 +5,6 @@ target 'Octor' do
   use_frameworks!
   pod 'TesseractOCRiOS'
   pod 'GPUImage'
+  pod 'IQKeyboardManagerSwift'
   pod 'SQLite.swift', '~> 0.12.0'
 end
