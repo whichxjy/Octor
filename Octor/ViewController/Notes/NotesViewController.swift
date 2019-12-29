@@ -98,9 +98,9 @@ extension NotesViewController: UITableViewDataSource {
 extension NotesViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let controller = NoteDetailController(noteDataSource: self.noteDataSource)
-    controller.note = self.notes[indexPath.row]
-    self.navigationController?.pushViewController(controller, animated: true)
+    let noteDetailController = NoteDetailController(noteDataSource: self.noteDataSource)
+    noteDetailController.note = self.notes[indexPath.row]
+    self.navigationController?.pushViewController(noteDetailController, animated: true)
   }
   
 }
