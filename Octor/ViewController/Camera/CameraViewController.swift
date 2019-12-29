@@ -5,20 +5,24 @@
 
 import UIKit
 import AVKit
+import Vision
 
 class CameraViewController: UIViewController {
   
-  private var takePhotoButton: UIButton!
+  private var textDetectionRequest: VNDetectTextRectanglesRequest!
   
   private var captureSession: AVCaptureSession!
   private var stillImageOutput: AVCapturePhotoOutput!
   private var videoPreviewLayer: AVCaptureVideoPreviewLayer!
+  
+  private var takePhotoButton: UIButton!
   
   public weak var delegate: CameraPhotoDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     setupBackButton()
+    setupTextDetection()
     setupCamera()
     addTakePhotoButton()
   }
@@ -36,6 +40,60 @@ class CameraViewController: UIViewController {
     self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
   }
   
+  // MARK: - TextDetection
+  
+  func setupTextDetection() {
+    textDetectionRequest = VNDetectTextRectanglesRequest(completionHandler: handleDetection)
+    textDetectionRequest!.reportCharacterBoxes = true
+  }
+  
+  private func handleDetection(request: VNRequest, error: Error?) {
+    guard let detectionResults = request.results else {
+      return
+    }
+    let textResults = detectionResults.map() {
+      return $0 as? VNTextObservation
+    }
+    if textResults.isEmpty {
+      return
+    }
+    DispatchQueue.main.async {
+      // remove old rects
+      self.view.layer.sublayers?.removeSubrange(2...)
+      let viewWidth = self.view.frame.size.width
+      let viewHeight = self.view.frame.size.height
+      for region in textResults {
+        guard let boxes = region?.characterBoxes else {
+          return
+        }
+        // iter all boxes in current region
+        var xMin = CGFloat.greatestFiniteMagnitude
+        var xMax: CGFloat = 0
+        var yMin = CGFloat.greatestFiniteMagnitude
+        var yMax: CGFloat = 0
+        for box in boxes {
+          xMin = min(xMin, box.bottomLeft.x)
+          xMax = max(xMax, box.bottomRight.x)
+          yMin = min(yMin, box.bottomRight.y)
+          yMax = max(yMax, box.topRight.y)
+        }
+        // position and size of the rect for current region
+        let x = xMin * viewWidth
+        let y = (1 - yMax) * viewHeight
+        let width = (xMax - xMin) * viewWidth
+        let height = (yMax - yMin) * viewHeight
+        // draw a new rect for current region
+        let layer = CALayer()
+        layer.frame = CGRect(x: x, y: y, width: width, height: height)
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.blue.cgColor
+        self.view.layer.addSublayer(layer)
+      }
+      // set button to the front
+      self.takePhotoButton.layer.zPosition = 1
+    }
+  }
+  
   // MARK: - Camera
   
   func setupCamera() {
@@ -45,15 +103,25 @@ class CameraViewController: UIViewController {
     guard let captureDevice = AVCaptureDevice.default(for: .video) else { return }
     guard let input = try? AVCaptureDeviceInput(device: captureDevice) else { return }
     
-    stillImageOutput = AVCapturePhotoOutput()
-    
-    if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput) {
-      captureSession.addInput(input)
-      captureSession.addOutput(stillImageOutput)
+    if captureSession.canAddInput(input) {
       videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-      view.layer.addSublayer(videoPreviewLayer)
-      captureSession.startRunning()
       videoPreviewLayer.frame = view.frame
+      videoPreviewLayer.videoGravity = .resize
+      view.layer.addSublayer(videoPreviewLayer)
+      // add input
+      captureSession.addInput(input)
+      // add image output
+      stillImageOutput = AVCapturePhotoOutput()
+      if captureSession.canAddOutput(stillImageOutput) {
+        captureSession.addOutput(stillImageOutput)
+      }
+      // add video data output
+      let videoDataOutput = AVCaptureVideoDataOutput()
+      videoDataOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "Buffer Queue", qos: .userInteractive, attributes: .concurrent, autoreleaseFrequency: .inherit, target: nil))
+      if captureSession.canAddOutput(videoDataOutput) {
+        captureSession.addOutput(videoDataOutput)
+      }
+      captureSession.startRunning()
     }
   }
   
@@ -82,6 +150,21 @@ class CameraViewController: UIViewController {
     stillImageOutput.capturePhoto(with: settings, delegate: self)
   }
   
+}
+
+// MARK: - AVCaptureVideoDataOutputSampleBufferDelegate
+
+extension CameraViewController: AVCaptureVideoDataOutputSampleBufferDelegate {
+  
+  func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return }
+    var imageRequestOptions = [VNImageOption: Any]()
+    if let cameraData = CMGetAttachment(sampleBuffer, key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix, attachmentModeOut: nil) {
+      imageRequestOptions[.cameraIntrinsics] = cameraData
+    }
+    let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 6)!, options: imageRequestOptions)
+    try! imageRequestHandler.perform([textDetectionRequest!])
+  }
 }
 
 // MARK: - AVCapturePhotoCaptureDelegate
