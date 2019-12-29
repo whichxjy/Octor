@@ -1,21 +1,43 @@
 //
 //  Created by @whichxjy.
 //  Copyright © 2019 @whichxjy. All rights reserved.
-//  
+//
 
 import UIKit
+import MobileCoreServices
 
 class NoteDetailController: UIViewController {
   
   private var textView: UITextView!
   private var saveButton: UIBarButtonItem!
   private var trashButton: UIBarButtonItem!
+  private var cameraButton: UIBarButtonItem!
+  
+  private var imagePicker: UIImagePickerController!
+  private var textRecognizer: TextRecognizer!
   
   public var note: Note? = nil
   private let placeholder = "请输入文字..."
   
   private var originalContent: String = ""
   private var shouldDelete: Bool = false
+  
+  private lazy var ocrAlertController: UIAlertController = {
+    let alert = UIAlertController(title: "文字识别", message: nil, preferredStyle: .actionSheet)
+    // photo library
+    alert.addAction(UIAlertAction(title: "从相册中添加", style: .default) { (alert) -> Void in
+      self.imagePicker.sourceType = .photoLibrary
+      self.present(self.imagePicker, animated: true)
+    })
+    return alert
+  }()
+  
+  private lazy var failAlertController: UIAlertController = {
+    let alert = UIAlertController(title: "识别不到文字", message: "请上传包含清晰文字的图片", preferredStyle: .alert)
+    // fail to recognize
+    alert.addAction(UIAlertAction(title: "返回", style: .default))
+    return alert
+  }()
   
   private let noteDataSource: NoteDataSource
   
@@ -30,33 +52,68 @@ class NoteDetailController: UIViewController {
   
   override func viewDidLoad() {
     self.view.backgroundColor = .black
-
-    self.navigationItem.title = "修改"
     self.navigationItem.largeTitleDisplayMode = .never
     
     // init note
     if self.note == nil {
       self.note = Note(content: "")
     }
+    
+    // init image picker
+    initImagePicker()
+    
     // original content to show
     self.originalContent = self.note?.content ?? ""
     // subviews
+    addCameraButton()
     addSaveButton()
     addTrashButton()
+    
     addTextView()
-    // only trash button
-    self.navigationItem.rightBarButtonItems = [trashButton]
+    // init text recognizer
+    textRecognizer = TextRecognizer()
+    // display camera button trash button
+    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
   }
   
-  // MARK: - Subviews
+  private func initImagePicker() {
+    imagePicker = UIImagePickerController()
+    imagePicker.delegate = self
+    imagePicker.mediaTypes = [kUTTypeImage as String]
+  }
+  
+  // MARK: - Camera Button
+  
+  func addCameraButton() {
+    cameraButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didTapCamera))
+  }
+  
+  @objc func didTapCamera() {
+    present(ocrAlertController, animated: true)
+  }
+  
+  // MARK: - Save Button
   
   func addSaveButton() {
     saveButton = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(didTapSave))
   }
   
+  @objc func didTapSave() {
+    self.textView.endEditing(true)
+  }
+  
+  // MARK: - Trash Button
+  
   func addTrashButton() {
     trashButton = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(didTapDelete))
   }
+  
+  @objc func didTapDelete() {
+    self.shouldDelete = true
+    self.navigationController?.popViewController(animated: true)
+  }
+  
+  // MARK: - Text View
   
   func addTextView() {
     textView = UITextView()
@@ -81,15 +138,6 @@ class NoteDetailController: UIViewController {
     textView.trailingAnchor.constraint(equalTo: self.view.readableContentGuide.trailingAnchor).isActive = true
   }
   
-  @objc func didTapSave() {
-    self.textView.endEditing(true)
-  }
-  
-  @objc func didTapDelete() {
-    self.shouldDelete = true
-    self.navigationController?.popViewController(animated: true)
-  }
-  
   override func viewWillDisappear(_ animated: Bool) {
     if self.textView.text.isEmpty || self.shouldDelete {
       self.note?.delete(dataSource: self.noteDataSource)
@@ -99,7 +147,6 @@ class NoteDetailController: UIViewController {
       guard self.originalContent != self.note?.content else {
         return
       }
-      
       self.note?.write(dataSource: self.noteDataSource)
     }
   }
@@ -117,10 +164,8 @@ extension NoteDetailController: UITextViewDelegate {
     
     self.navigationItem.hidesBackButton = true
     
-    // display trash button and save button
-    if let trashButton = self.trashButton, let doneButton = self.saveButton {
-      self.navigationItem.rightBarButtonItems = [doneButton, trashButton]
-    }
+    // display camera button, trash button and save button
+    self.navigationItem.rightBarButtonItems = [saveButton, trashButton, cameraButton]
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
@@ -130,12 +175,40 @@ extension NoteDetailController: UITextViewDelegate {
     
     self.note?.content = textView.text
     
-    // display trash button
-    if let trashButton = self.trashButton {
-      self.navigationItem.rightBarButtonItems = [trashButton]
-    }
+    // display camera button and trash button
+    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
     
     self.navigationItem.hidesBackButton = false
   }
   
 }
+
+// MARK: - UINavigationControllerDelegate
+extension NoteDetailController: UINavigationControllerDelegate {
+  // empty
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension NoteDetailController: UIImagePickerControllerDelegate {
+  func imagePickerController(_ picker: UIImagePickerController,
+                             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    guard let selectedPhoto = info[.originalImage] as? UIImage else {
+      dismiss(animated: true)
+      return
+    }
+    
+    dismiss(animated: true) {
+      let resultText = self.textRecognizer.recognize(selectedPhoto)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+      // check if the result text is empty
+      if (resultText.filter { !$0.isNewline && !$0.isWhitespace } == "") {
+        self.present(self.failAlertController, animated: true, completion: nil)
+      }
+      else {
+        // append result text to the content of current note
+        self.textView.text.append(resultText)
+      }
+    }
+  }
+}
+
+
