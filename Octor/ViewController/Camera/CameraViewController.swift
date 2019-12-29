@@ -21,6 +21,7 @@ class CameraViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationItem.title = "文字识别"
     setupBackButton()
     setupTextDetection()
     setupCamera()
@@ -86,7 +87,7 @@ class CameraViewController: UIViewController {
         let layer = CALayer()
         layer.frame = CGRect(x: x, y: y, width: width, height: height)
         layer.borderWidth = 1
-        layer.borderColor = UIColor.blue.cgColor
+        layer.borderColor = UIColor.systemTeal.cgColor
         self.view.layer.addSublayer(layer)
       }
       // set button to the front
@@ -121,7 +122,7 @@ class CameraViewController: UIViewController {
       if captureSession.canAddOutput(videoDataOutput) {
         captureSession.addOutput(videoDataOutput)
       }
-      captureSession.startRunning()
+      self.captureSession.startRunning()
     }
   }
   
@@ -134,20 +135,20 @@ class CameraViewController: UIViewController {
     takePhotoButton.backgroundColor = .white
     takePhotoButton.layer.cornerRadius = buttonDiameter / 2
     takePhotoButton.clipsToBounds = true
-    takePhotoButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    takePhotoButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside)
     
     self.view.addSubview(takePhotoButton)
     
     // layout
     takePhotoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-    takePhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -2 * buttonDiameter).isActive = true
+    takePhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -1.5 * buttonDiameter).isActive = true
     takePhotoButton.widthAnchor.constraint(equalToConstant: buttonDiameter).isActive = true
     takePhotoButton.heightAnchor.constraint(equalToConstant: buttonDiameter).isActive = true
   }
   
-  @objc func buttonAction(sender: UIButton!) {
+  @objc func didTapTakePhoto(sender: UIButton!) {
     let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
-    stillImageOutput.capturePhoto(with: settings, delegate: self)
+    self.stillImageOutput.capturePhoto(with: settings, delegate: self)
   }
   
 }
