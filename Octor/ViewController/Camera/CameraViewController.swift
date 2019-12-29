@@ -85,7 +85,7 @@ class CameraViewController: UIViewController {
         // draw a new rect for current region
         let layer = CALayer()
         layer.frame = CGRect(x: x, y: y, width: width, height: height)
-        layer.borderWidth = 2
+        layer.borderWidth = 1
         layer.borderColor = UIColor.blue.cgColor
         self.view.layer.addSublayer(layer)
       }
