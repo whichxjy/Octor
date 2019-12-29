@@ -54,11 +54,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B13C2FF23B86F980098A6C8 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				0B2ED48423B6F02700C6AC99 /* TextRecognizer.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		0B249C4F23B60C9E00BE7D34 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				0B2ED49723B71D0900C6AC99 /* Notes */,
-				0B2ED48423B6F02700C6AC99 /* TextRecognizer.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -125,6 +132,7 @@
 			children = (
 				0B2ED48A23B7099800C6AC99 /* Model */,
 				0B249C4F23B60C9E00BE7D34 /* ViewController */,
+				0B13C2FF23B86F980098A6C8 /* Util */,
 				B8716EEC20D0D9B600ACE7D3 /* AppDelegate.swift */,
 				B8716EF320D0D9B800ACE7D3 /* Assets.xcassets */,
 				B8716EF520D0D9B800ACE7D3 /* LaunchScreen.storyboard */,
