@@ -149,7 +149,6 @@ class CameraViewController: UIViewController {
   @objc func didTapTakePhoto(sender: UIButton!) {
     let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
     self.stillImageOutput.capturePhoto(with: settings, delegate: self)
-    self.captureSession.stopRunning()
   }
   
 }
@@ -183,9 +182,7 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
       self.delegate?.onCameraPhotoReady(image: image)
       self.navigationController?.popViewController(animated: true)
     })
-    photoAlertController.addAction(UIAlertAction(title: "重新选择", style: .default) { (alert) -> Void in
-      self.captureSession.startRunning()
-    })
+    photoAlertController.addAction(UIAlertAction(title: "重新选择", style: .default, handler: nil))
     photoAlertController.addAction(UIAlertAction(title: "丢弃", style: .cancel) { (alert) -> Void in
       self.navigationController?.popViewController(animated: true)
     })
