@@ -23,9 +23,8 @@ class NoteTableCell: UITableViewCell {
       self.titleLabel.text = String(note.content.split(separator: "\n")[0])
       // set subtitle with date
       let formatter = DateFormatter()
-      formatter.dateStyle = .medium
-      formatter.timeStyle = .short
-      self.subtitleLabel.text = "Edited on \(formatter.string(from: note.lastEdited))"
+      formatter.dateFormat = "yyyy/M/dd h:mm"
+      self.subtitleLabel.text = "\(formatter.string(from: note.lastEdited))"
     }
   }
   
