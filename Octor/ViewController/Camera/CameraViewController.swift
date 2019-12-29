@@ -18,7 +18,7 @@ class CameraViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationController?.navigationBar.topItem?.title = "返回"
+    setupBackButton()
     setupCamera()
     addTakePhotoButton()
   }
@@ -26,6 +26,14 @@ class CameraViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     self.captureSession.stopRunning()
+  }
+  
+  // MARK: - Back button
+  
+  func setupBackButton() {
+    let backButton = UIBarButtonItem()
+    backButton.title = "返回"
+    self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
   }
   
   // MARK: - Camera
