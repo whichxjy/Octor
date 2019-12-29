@@ -64,9 +64,9 @@ class NoteDetailController: UIViewController {
     if self.note == nil {
       self.note = Note(content: "")
     }
-  
+    
     setupBackButton()
-
+    
     // init image picker
     initImagePicker()
     
@@ -102,7 +102,7 @@ class NoteDetailController: UIViewController {
   // MARK: - Back Button
   
   func setupBackButton() {
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "完成", style: .plain, target: self, action: #selector(saveAndExit))
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "完成", style: .plain, target: self, action: #selector(saveAndExit))
   }
   
   @objc func saveAndExit() {
@@ -169,22 +169,13 @@ extension NoteDetailController: UITextViewDelegate {
     if textView.text == self.placeholder {
       textView.text = ""
     }
-    
-    // display camera button, trash button and save button
-    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
     if textView.text.isEmpty {
       textView.text = self.placeholder
     }
-    
     self.note?.content = textView.text
-    
-    // display camera button and trash button
-    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
-    
-    self.navigationItem.hidesBackButton = false
   }
   
   func recognizeAndAppend(image: UIImage) {
