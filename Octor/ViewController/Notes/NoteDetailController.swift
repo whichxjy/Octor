@@ -25,11 +25,13 @@ class NoteDetailController: UIViewController {
   private lazy var ocrAlertController: UIAlertController = {
     let alert = UIAlertController(title: "文字识别", message: nil, preferredStyle: .actionSheet)
     // camera photo
-    alert.addAction(UIAlertAction(title: "拍照", style: .default) { (alert) -> Void in
-      let cameraViewController = CameraViewController()
-      cameraViewController.delegate = self
-      self.navigationController?.pushViewController(cameraViewController, animated: true)
-    })
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+      alert.addAction(UIAlertAction(title: "拍照", style: .default) { (alert) -> Void in
+        let cameraViewController = CameraViewController()
+        cameraViewController.delegate = self
+        self.navigationController?.pushViewController(cameraViewController, animated: true)
+      })
+    }
     // photo library
     alert.addAction(UIAlertAction(title: "从相册中添加", style: .default) { (alert) -> Void in
       self.present(self.imagePicker, animated: true)
