@@ -9,6 +9,7 @@ import MobileCoreServices
 class NoteDetailController: UIViewController {
   
   private var textView: UITextView!
+  private var shareButton: UIBarButtonItem!
   private var trashButton: UIBarButtonItem!
   private var cameraButton: UIBarButtonItem!
   
@@ -76,23 +77,14 @@ class NoteDetailController: UIViewController {
     self.originalContent = self.note?.content ?? ""
     // subviews
     setupBackButton()
+    addShareButton()
     addCameraButton()
     addTrashButton()
     addTextView()
     // display camera button trash button
-    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
+    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton, shareButton]
     // show keyboard
     textView.becomeFirstResponder()
-  }
-  
-  // MARK: - Camera Button
-  
-  func addCameraButton() {
-    cameraButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didTapCamera))
-  }
-  
-  @objc func didTapCamera() {
-    present(ocrAlertController, animated: true)
   }
   
   // MARK: - Back Button
@@ -104,6 +96,28 @@ class NoteDetailController: UIViewController {
   @objc func saveAndExit() {
     self.textView.endEditing(true)
     self.navigationController?.popViewController(animated: true)
+  }
+  
+  // MARK: - Share Button
+  
+  func addShareButton() {
+    shareButton = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(didTapShare))
+  }
+  
+  @objc func didTapShare() {
+    let activityViewController = UIActivityViewController(activityItems: [textView.text!], applicationActivities: nil)
+    activityViewController.popoverPresentationController?.sourceView = self.view
+    present(activityViewController, animated: true)
+  }
+  
+  // MARK: - Camera Button
+  
+  func addCameraButton() {
+    cameraButton = UIBarButtonItem(barButtonSystemItem: .camera, target: self, action: #selector(didTapCamera))
+  }
+  
+  @objc func didTapCamera() {
+    present(ocrAlertController, animated: true)
   }
   
   // MARK: - Trash Button
