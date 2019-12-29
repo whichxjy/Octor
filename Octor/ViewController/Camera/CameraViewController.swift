@@ -121,7 +121,9 @@ class CameraViewController: UIViewController {
       if captureSession.canAddOutput(videoDataOutput) {
         captureSession.addOutput(videoDataOutput)
       }
-      captureSession.startRunning()
+      DispatchQueue.global(qos: .userInitiated).async {
+        self.captureSession.startRunning()
+      }
     }
   }
   
