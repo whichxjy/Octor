@@ -122,9 +122,7 @@ class CameraViewController: UIViewController {
       if captureSession.canAddOutput(videoDataOutput) {
         captureSession.addOutput(videoDataOutput)
       }
-      DispatchQueue.global(qos: .userInitiated).async {
-        self.captureSession.startRunning()
-      }
+      self.captureSession.startRunning()
     }
   }
   
@@ -137,7 +135,7 @@ class CameraViewController: UIViewController {
     takePhotoButton.backgroundColor = .white
     takePhotoButton.layer.cornerRadius = buttonDiameter / 2
     takePhotoButton.clipsToBounds = true
-    takePhotoButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+    takePhotoButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside)
     
     self.view.addSubview(takePhotoButton)
     
@@ -148,9 +146,10 @@ class CameraViewController: UIViewController {
     takePhotoButton.heightAnchor.constraint(equalToConstant: buttonDiameter).isActive = true
   }
   
-  @objc func buttonAction(sender: UIButton!) {
+  @objc func didTapTakePhoto(sender: UIButton!) {
     let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
-    stillImageOutput.capturePhoto(with: settings, delegate: self)
+    self.stillImageOutput.capturePhoto(with: settings, delegate: self)
+    self.captureSession.stopRunning()
   }
   
 }
@@ -184,7 +183,9 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
       self.delegate?.onCameraPhotoReady(image: image)
       self.navigationController?.popViewController(animated: true)
     })
-    photoAlertController.addAction(UIAlertAction(title: "重新选择", style: .default, handler: nil))
+    photoAlertController.addAction(UIAlertAction(title: "重新选择", style: .default) { (alert) -> Void in
+      self.captureSession.startRunning()
+    })
     photoAlertController.addAction(UIAlertAction(title: "丢弃", style: .cancel) { (alert) -> Void in
       self.navigationController?.popViewController(animated: true)
     })
