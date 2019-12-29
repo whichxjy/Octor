@@ -41,7 +41,7 @@ class NotesViewController: UIViewController {
     self.navigationController?.navigationBar.tintColor = .white
     self.navigationController?.navigationBar.prefersLargeTitles = true
     self.navigationItem.largeTitleDisplayMode = .automatic
-    self.navigationItem.title = "全部笔记"
+    self.navigationItem.title = "笔记"
     // add compose button
     self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapCompose))
   }
