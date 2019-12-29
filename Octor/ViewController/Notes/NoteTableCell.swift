@@ -53,7 +53,7 @@ class NoteTableCell: UITableViewCell {
   func addCustomBackgroundView() {
     customBackgroundView = UIView()
     customBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-    customBackgroundView.backgroundColor = UIColor(red: 64/255, green: 64/255, blue: 64/255, alpha: 1.0)
+    customBackgroundView.backgroundColor = UIColor(red: 64 / 255, green: 64 / 255, blue: 64 / 255, alpha: 1.0)
     customBackgroundView.layer.cornerRadius = 10
     customBackgroundView.clipsToBounds = true
     self.contentView.addSubview(customBackgroundView)

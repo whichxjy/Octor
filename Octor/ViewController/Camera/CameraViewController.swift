@@ -87,7 +87,7 @@ class CameraViewController: UIViewController {
         let layer = CALayer()
         layer.frame = CGRect(x: x, y: y, width: width, height: height)
         layer.borderWidth = 1
-        layer.borderColor = UIColor.blue.cgColor
+        layer.borderColor = UIColor.systemTeal.cgColor
         self.view.layer.addSublayer(layer)
       }
       // set button to the front
@@ -143,7 +143,7 @@ class CameraViewController: UIViewController {
     
     // layout
     takePhotoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-    takePhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -2 * buttonDiameter).isActive = true
+    takePhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -1.5 * buttonDiameter).isActive = true
     takePhotoButton.widthAnchor.constraint(equalToConstant: buttonDiameter).isActive = true
     takePhotoButton.heightAnchor.constraint(equalToConstant: buttonDiameter).isActive = true
   }

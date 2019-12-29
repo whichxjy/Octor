@@ -23,7 +23,7 @@ class NoteDetailController: UIViewController {
   private lazy var textRecognizer: TextRecognizer = TextRecognizer()
   
   public var note: Note? = nil
-  private let placeholder = "请输入文字..."
+  private let placeholder = ""
   
   private var originalContent: String = ""
   private var shouldDelete: Bool = false
