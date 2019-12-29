@@ -21,6 +21,7 @@ class CameraViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.navigationItem.title = "文字识别"
     setupBackButton()
     setupTextDetection()
     setupCamera()
