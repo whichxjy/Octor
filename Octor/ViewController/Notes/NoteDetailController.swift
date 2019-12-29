@@ -1,9 +1,10 @@
 //
 //  Created by @whichxjy.
 //  Copyright © 2019 @whichxjy. All rights reserved.
-//  
+//
 
 import UIKit
+import MobileCoreServices
 
 class NoteDetailController: UIViewController {
   
@@ -11,6 +12,9 @@ class NoteDetailController: UIViewController {
   private var saveButton: UIBarButtonItem!
   private var trashButton: UIBarButtonItem!
   private var cameraButton: UIBarButtonItem!
+  
+  private var imagePicker: UIImagePickerController!
+  private var textRecognizer: TextRecognizer!
   
   public var note: Note? = nil
   private let placeholder = "请输入文字..."
@@ -22,7 +26,8 @@ class NoteDetailController: UIViewController {
     let alert = UIAlertController(title: "文字识别", message: nil, preferredStyle: .actionSheet)
     // photo library
     alert.addAction(UIAlertAction(title: "从相册中添加", style: .default) { (alert) -> Void in
-      print("photo")
+      self.imagePicker.sourceType = .photoLibrary
+      self.present(self.imagePicker, animated: true)
     })
     return alert
   }()
@@ -46,6 +51,10 @@ class NoteDetailController: UIViewController {
     if self.note == nil {
       self.note = Note(content: "")
     }
+    
+    // init image picker
+    initImagePicker()
+    
     // original content to show
     self.originalContent = self.note?.content ?? ""
     // subviews
@@ -54,8 +63,16 @@ class NoteDetailController: UIViewController {
     addTrashButton()
     
     addTextView()
+    // init text recognizer
+    textRecognizer = TextRecognizer()
     // display camera button trash button
     self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
+  }
+  
+  private func initImagePicker() {
+    imagePicker = UIImagePickerController()
+    imagePicker.delegate = self
+    imagePicker.mediaTypes = [kUTTypeImage as String]
   }
   
   // MARK: - Camera Button
@@ -158,3 +175,27 @@ extension NoteDetailController: UITextViewDelegate {
   }
   
 }
+
+// MARK: - UINavigationControllerDelegate
+extension NoteDetailController: UINavigationControllerDelegate {
+  // empty
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension NoteDetailController: UIImagePickerControllerDelegate {
+  func imagePickerController(_ picker: UIImagePickerController,
+                             didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    guard let selectedPhoto = info[.originalImage] as? UIImage else {
+      dismiss(animated: true)
+      return
+    }
+    
+    dismiss(animated: true) {
+      let resultText = self.textRecognizer.recognize(selectedPhoto)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+      // append result text to the content of current note
+      self.textView.text.append(resultText)
+    }
+  }
+}
+
+
