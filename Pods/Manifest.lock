@@ -1,22 +1,26 @@
 PODS:
+  - GPUImage (0.1.7)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
   - SQLite.swift/standard (0.12.2)
   - TesseractOCRiOS (5.0.1)
 
 DEPENDENCIES:
+  - GPUImage
   - SQLite.swift (~> 0.12.0)
   - TesseractOCRiOS
 
 SPEC REPOS:
   trunk:
+    - GPUImage
     - SQLite.swift
     - TesseractOCRiOS
 
 SPEC CHECKSUMS:
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   TesseractOCRiOS: 2c189465f86abb030d0c5141c90da9705b647854
 
-PODFILE CHECKSUM: efbd1c8650979f21d494465d514f1629cc491014
+PODFILE CHECKSUM: 862ffb9a78cb15490e2afaf5b86bf8bdd10da1af
 
 COCOAPODS: 1.8.4

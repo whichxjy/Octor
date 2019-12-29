@@ -1,3 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-Octor/Pods-Octor-frameworks.sh
+${BUILT_PRODUCTS_DIR}/GPUImage/GPUImage.framework
 ${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework
 ${BUILT_PRODUCTS_DIR}/TesseractOCRiOS/TesseractOCR.framework
