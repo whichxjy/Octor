@@ -12,7 +12,14 @@ class NoteDetailController: UIViewController {
   private var trashButton: UIBarButtonItem!
   private var cameraButton: UIBarButtonItem!
   
-  private var imagePicker: UIImagePickerController!
+  private lazy var imagePicker: UIImagePickerController = {
+    let imagePicker = UIImagePickerController()
+    imagePicker.sourceType = .photoLibrary
+    imagePicker.delegate = self
+    imagePicker.mediaTypes = [kUTTypeImage as String]
+    return imagePicker
+  }()
+  
   private lazy var textRecognizer: TextRecognizer = TextRecognizer()
   
   public var note: Note? = nil
@@ -65,14 +72,10 @@ class NoteDetailController: UIViewController {
       self.note = Note(content: "")
     }
     
-    setupBackButton()
-    
-    // init image picker
-    initImagePicker()
-    
     // original content to show
     self.originalContent = self.note?.content ?? ""
     // subviews
+    setupBackButton()
     addCameraButton()
     addTrashButton()
     addTextView()
@@ -80,13 +83,6 @@ class NoteDetailController: UIViewController {
     self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
     // show keyboard
     textView.becomeFirstResponder()
-  }
-  
-  private func initImagePicker() {
-    imagePicker = UIImagePickerController()
-    imagePicker.sourceType = .photoLibrary
-    imagePicker.delegate = self
-    imagePicker.mediaTypes = [kUTTypeImage as String]
   }
   
   // MARK: - Camera Button
