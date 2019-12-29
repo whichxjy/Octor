@@ -18,6 +18,7 @@ class CameraViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupBackButton()
     setupCamera()
     addTakePhotoButton()
   }
@@ -25,6 +26,14 @@ class CameraViewController: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     self.captureSession.stopRunning()
+  }
+  
+  // MARK: - Back button
+  
+  func setupBackButton() {
+    let backButton = UIBarButtonItem()
+    backButton.title = "返回"
+    self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
   }
   
   // MARK: - Camera
@@ -89,8 +98,9 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
       self.delegate?.onCameraPhotoReady(image: image)
       self.navigationController?.popViewController(animated: true)
     })
+    photoAlertController.addAction(UIAlertAction(title: "重新选择", style: .default, handler: nil))
     photoAlertController.addAction(UIAlertAction(title: "丢弃", style: .cancel) { (alert) -> Void in
-      
+      self.navigationController?.popViewController(animated: true)
     })
     
     present(photoAlertController, animated: true)

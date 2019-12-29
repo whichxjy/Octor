@@ -9,12 +9,18 @@ import MobileCoreServices
 class NoteDetailController: UIViewController {
   
   private var textView: UITextView!
-  private var saveButton: UIBarButtonItem!
   private var trashButton: UIBarButtonItem!
   private var cameraButton: UIBarButtonItem!
   
-  private var imagePicker: UIImagePickerController!
-  private var textRecognizer: TextRecognizer!
+  private lazy var imagePicker: UIImagePickerController = {
+    let imagePicker = UIImagePickerController()
+    imagePicker.sourceType = .photoLibrary
+    imagePicker.delegate = self
+    imagePicker.mediaTypes = [kUTTypeImage as String]
+    return imagePicker
+  }()
+  
+  private lazy var textRecognizer: TextRecognizer = TextRecognizer()
   
   public var note: Note? = nil
   private let placeholder = "请输入文字..."
@@ -25,11 +31,13 @@ class NoteDetailController: UIViewController {
   private lazy var ocrAlertController: UIAlertController = {
     let alert = UIAlertController(title: "文字识别", message: nil, preferredStyle: .actionSheet)
     // camera photo
-    alert.addAction(UIAlertAction(title: "拍照", style: .default) { (alert) -> Void in
-      let cameraViewController = CameraViewController()
-      cameraViewController.delegate = self
-      self.navigationController?.pushViewController(cameraViewController, animated: true)
-    })
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+      alert.addAction(UIAlertAction(title: "拍照", style: .default) { (alert) -> Void in
+        let cameraViewController = CameraViewController()
+        cameraViewController.delegate = self
+        self.navigationController?.pushViewController(cameraViewController, animated: true)
+      })
+    }
     // photo library
     alert.addAction(UIAlertAction(title: "从相册中添加", style: .default) { (alert) -> Void in
       self.present(self.imagePicker, animated: true)
@@ -64,29 +72,17 @@ class NoteDetailController: UIViewController {
       self.note = Note(content: "")
     }
     
-    // init image picker
-    initImagePicker()
-    
     // original content to show
     self.originalContent = self.note?.content ?? ""
     // subviews
+    setupBackButton()
     addCameraButton()
-    addSaveButton()
     addTrashButton()
     addTextView()
-    // init text recognizer
-    textRecognizer = TextRecognizer()
     // display camera button trash button
     self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
     // show keyboard
     textView.becomeFirstResponder()
-  }
-  
-  private func initImagePicker() {
-    imagePicker = UIImagePickerController()
-    imagePicker.sourceType = .photoLibrary
-    imagePicker.delegate = self
-    imagePicker.mediaTypes = [kUTTypeImage as String]
   }
   
   // MARK: - Camera Button
@@ -99,14 +95,15 @@ class NoteDetailController: UIViewController {
     present(ocrAlertController, animated: true)
   }
   
-  // MARK: - Save Button
+  // MARK: - Back Button
   
-  func addSaveButton() {
-    saveButton = UIBarButtonItem(title: "保存", style: .done, target: self, action: #selector(didTapSave))
+  func setupBackButton() {
+    self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "完成", style: .plain, target: self, action: #selector(saveAndExit))
   }
   
-  @objc func didTapSave() {
+  @objc func saveAndExit() {
     self.textView.endEditing(true)
+    self.navigationController?.popViewController(animated: true)
   }
   
   // MARK: - Trash Button
@@ -168,24 +165,13 @@ extension NoteDetailController: UITextViewDelegate {
     if textView.text == self.placeholder {
       textView.text = ""
     }
-    
-    self.navigationItem.hidesBackButton = true
-    
-    // display camera button, trash button and save button
-    self.navigationItem.rightBarButtonItems = [saveButton, trashButton, cameraButton]
   }
   
   func textViewDidEndEditing(_ textView: UITextView) {
     if textView.text.isEmpty {
       textView.text = self.placeholder
     }
-    
     self.note?.content = textView.text
-    
-    // display camera button and trash button
-    self.navigationItem.rightBarButtonItems = [trashButton, cameraButton]
-    
-    self.navigationItem.hidesBackButton = false
   }
   
   func recognizeAndAppend(image: UIImage) {
