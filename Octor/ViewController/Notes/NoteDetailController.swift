@@ -65,6 +65,7 @@ class NoteDetailController: UIViewController {
   
   override func viewDidLoad() {
     self.view.backgroundColor = .black
+    self.view.backgroundColor = Theme.backgroundColor
     self.navigationItem.largeTitleDisplayMode = .never
     
     // init note
