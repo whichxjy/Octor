@@ -22,13 +22,20 @@ class NoteDetailController: UIViewController {
   private var originalContent: String = ""
   private var shouldDelete: Bool = false
   
-  private lazy var alertController: UIAlertController = {
+  private lazy var ocrAlertController: UIAlertController = {
     let alert = UIAlertController(title: "文字识别", message: nil, preferredStyle: .actionSheet)
     // photo library
     alert.addAction(UIAlertAction(title: "从相册中添加", style: .default) { (alert) -> Void in
       self.imagePicker.sourceType = .photoLibrary
       self.present(self.imagePicker, animated: true)
     })
+    return alert
+  }()
+  
+  private lazy var failAlertController: UIAlertController = {
+    let alert = UIAlertController(title: "识别不到文字", message: "请上传包含清晰文字的图片", preferredStyle: .alert)
+    // fail to recognize
+    alert.addAction(UIAlertAction(title: "返回", style: .default))
     return alert
   }()
   
@@ -82,7 +89,7 @@ class NoteDetailController: UIViewController {
   }
   
   @objc func didTapCamera() {
-    present(alertController, animated: true)
+    present(ocrAlertController, animated: true)
   }
   
   // MARK: - Save Button
@@ -192,8 +199,14 @@ extension NoteDetailController: UIImagePickerControllerDelegate {
     
     dismiss(animated: true) {
       let resultText = self.textRecognizer.recognize(selectedPhoto)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-      // append result text to the content of current note
-      self.textView.text.append(resultText)
+      // check if the result text is empty
+      if (resultText.filter { !$0.isNewline && !$0.isWhitespace } == "") {
+        self.present(self.failAlertController, animated: true, completion: nil)
+      }
+      else {
+        // append result text to the content of current note
+        self.textView.text.append(resultText)
+      }
     }
   }
 }
