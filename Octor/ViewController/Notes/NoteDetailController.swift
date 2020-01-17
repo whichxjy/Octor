@@ -205,12 +205,15 @@ extension NoteDetailController: UITextViewDelegate {
 }
 
 // MARK: - UINavigationControllerDelegate
+
 extension NoteDetailController: UINavigationControllerDelegate {
   // empty
 }
 
 // MARK: - UIImagePickerControllerDelegate
+
 extension NoteDetailController: UIImagePickerControllerDelegate {
+  
   func imagePickerController(_ picker: UIImagePickerController,
                              didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     guard let selectedPhoto = info[.originalImage] as? UIImage else {
@@ -222,6 +225,7 @@ extension NoteDetailController: UIImagePickerControllerDelegate {
       self.recognizeAndAppend(image: selectedPhoto)
     }
   }
+  
 }
 
 // MARK: - CameraPhotoDelegate

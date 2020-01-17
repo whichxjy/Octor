@@ -65,6 +65,8 @@ class NoteDataSource: DataSource {
   
 }
 
+// MARK: - Notification Extension
+
 extension Notification.Name {
   
   static let noteDataChanged = Notification.Name(rawValue: "noteDataChanged")
