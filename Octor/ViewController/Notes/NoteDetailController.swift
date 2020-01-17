@@ -199,6 +199,7 @@ extension NoteDetailController: UITextViewDelegate {
       // append result text to the content of current note
       self.textView.text.append(resultText)
     }
+    textView.becomeFirstResponder()
   }
   
 }
