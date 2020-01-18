@@ -51,16 +51,12 @@ class NotesViewController: UIViewController {
     notesTableView.translatesAutoresizingMaskIntoConstraints = false
     notesTableView.backgroundColor = UIColor.clear
     notesTableView.separatorStyle = .none
-    
     notesTableView.dataSource = self
     notesTableView.delegate = self
-    
     notesTableView.rowHeight = UITableView.automaticDimension
     notesTableView.estimatedRowHeight = CGFloat(50)
-    
     notesTableView.register(NoteTableCell.self, forCellReuseIdentifier: NoteTableCell.cellID)
     self.view.addSubview(notesTableView)
-    
     // layout
     notesTableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
     notesTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true

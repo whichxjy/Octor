@@ -79,15 +79,16 @@ class NoteTableCell: UITableViewCell {
   }
   
   override func layoutSubviews() {
+    // background layout
     self.customBackgroundView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5).isActive = true
     self.customBackgroundView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -5).isActive = true
     self.customBackgroundView.leadingAnchor.constraint(equalTo: self.contentView.readableContentGuide.leadingAnchor).isActive = true
     self.customBackgroundView.trailingAnchor.constraint(equalTo: self.contentView.readableContentGuide.trailingAnchor).isActive = true
-    
+    // title label layout
     self.titleLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20).isActive = true
     self.titleLabel.leadingAnchor.constraint(equalTo: self.contentView.readableContentGuide.leadingAnchor, constant: 10).isActive = true
     self.titleLabel.trailingAnchor.constraint(equalTo: self.contentView.readableContentGuide.trailingAnchor).isActive = true
-    
+    // subtitle label layout
     self.subtitleLabel.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor).isActive = true
     self.subtitleLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -10).isActive = true
     self.subtitleLabel.leadingAnchor.constraint(equalTo: self.titleLabel.leadingAnchor).isActive = true

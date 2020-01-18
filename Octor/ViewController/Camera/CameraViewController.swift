@@ -136,9 +136,7 @@ class CameraViewController: UIViewController {
     takePhotoButton.layer.cornerRadius = buttonDiameter / 2
     takePhotoButton.clipsToBounds = true
     takePhotoButton.addTarget(self, action: #selector(didTapTakePhoto), for: .touchUpInside)
-    
     self.view.addSubview(takePhotoButton)
-    
     // layout
     takePhotoButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
     takePhotoButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -1.5 * buttonDiameter).isActive = true

@@ -145,10 +145,8 @@ class NoteDetailController: UIViewController {
     textView.isScrollEnabled = true
     textView.backgroundColor = UIColor.clear
     textView.dataDetectorTypes = .all
-    
-    self.textView.text = self.note?.content.isEmpty == true ? self.placeholder : self.note?.content
-    self.textView.delegate = self
-    
+    textView.text = self.note?.content.isEmpty == true ? self.placeholder : self.note?.content
+    textView.delegate = self
     self.view.addSubview(self.textView)
     // layout
     textView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true

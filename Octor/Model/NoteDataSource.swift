@@ -32,7 +32,7 @@ class NoteDataSource: DataSource {
     db = try! Connection("\(path)/db.sqlite3")
     
     // create table
-    _ = try? db.run(noteTable.create(temporary: false) { t in
+    _ = try? db.run(noteTable.create(ifNotExists: true) { t in
       t.column(id, primaryKey: true)
       t.column(content)
       t.column(lastEdited)
