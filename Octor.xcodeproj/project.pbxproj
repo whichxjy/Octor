@@ -18,12 +18,23 @@
 		0B2ED49423B71A9D00C6AC99 /* NoteDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED49323B71A9D00C6AC99 /* NoteDetailController.swift */; };
 		0B2ED49623B71AFE00C6AC99 /* NoteTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2ED49523B71AFE00C6AC99 /* NoteTableCell.swift */; };
 		0B31563D23B65F27003330DE /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 0B31563C23B65F27003330DE /* tessdata */; };
+		0B71443B23D39380007811B1 /* OctorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B71443A23D39380007811B1 /* OctorUITests.swift */; };
 		0BC3BD9823B944F60058BB70 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC3BD9723B944F60058BB70 /* Theme.swift */; };
 		46E8DF488CEBC1E02C80152F /* Pods_Octor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C71CAE8362299AA6D360C437 /* Pods_Octor.framework */; };
 		B8716EED20D0D9B600ACE7D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8716EEC20D0D9B600ACE7D3 /* AppDelegate.swift */; };
 		B8716EF420D0D9B800ACE7D3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B8716EF320D0D9B800ACE7D3 /* Assets.xcassets */; };
 		B8716EF720D0D9B800ACE7D3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B8716EF520D0D9B800ACE7D3 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0B71443D23D39380007811B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B8716EE120D0D9B600ACE7D3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B8716EE820D0D9B600ACE7D3;
+			remoteInfo = Octor;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0B13C30023B878D10098A6C8 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +48,9 @@
 		0B2ED49323B71A9D00C6AC99 /* NoteDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailController.swift; sourceTree = "<group>"; };
 		0B2ED49523B71AFE00C6AC99 /* NoteTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableCell.swift; sourceTree = "<group>"; };
 		0B31563C23B65F27003330DE /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
+		0B71443823D39380007811B1 /* OctorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OctorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B71443A23D39380007811B1 /* OctorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OctorUITests.swift; sourceTree = "<group>"; };
+		0B71443C23D39380007811B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BC3BD9723B944F60058BB70 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		4B7BAD648B794EB239166903 /* Pods-Octor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Octor.debug.xcconfig"; path = "Target Support Files/Pods-Octor/Pods-Octor.debug.xcconfig"; sourceTree = "<group>"; };
 		A78D37B5048C4482C254D6A6 /* Pods-Octor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Octor.release.xcconfig"; path = "Target Support Files/Pods-Octor/Pods-Octor.release.xcconfig"; sourceTree = "<group>"; };
@@ -49,6 +63,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0B71443523D39380007811B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8716EE620D0D9B600ACE7D3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -108,6 +129,15 @@
 			path = Notes;
 			sourceTree = "<group>";
 		};
+		0B71443923D39380007811B1 /* OctorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				0B71443A23D39380007811B1 /* OctorUITests.swift */,
+				0B71443C23D39380007811B1 /* Info.plist */,
+			);
+			path = OctorUITests;
+			sourceTree = "<group>";
+		};
 		5EC4379CED2B951BF6F56722 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +160,7 @@
 			children = (
 				0B31563C23B65F27003330DE /* tessdata */,
 				B8716EEB20D0D9B600ACE7D3 /* Octor */,
+				0B71443923D39380007811B1 /* OctorUITests */,
 				B8716EEA20D0D9B600ACE7D3 /* Products */,
 				5EC4379CED2B951BF6F56722 /* Pods */,
 				777CCAE305635C8243E2C5C3 /* Frameworks */,
@@ -140,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				B8716EE920D0D9B600ACE7D3 /* Octor.app */,
+				0B71443823D39380007811B1 /* OctorUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,6 +193,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0B71443723D39380007811B1 /* OctorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B71444123D39380007811B1 /* Build configuration list for PBXNativeTarget "OctorUITests" */;
+			buildPhases = (
+				0B71443423D39380007811B1 /* Sources */,
+				0B71443523D39380007811B1 /* Frameworks */,
+				0B71443623D39380007811B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0B71443E23D39380007811B1 /* PBXTargetDependency */,
+			);
+			name = OctorUITests;
+			productName = OctorUITests;
+			productReference = 0B71443823D39380007811B1 /* OctorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		B8716EE820D0D9B600ACE7D3 /* Octor */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B8716EFB20D0D9B800ACE7D3 /* Build configuration list for PBXNativeTarget "Octor" */;
@@ -186,10 +236,14 @@
 		B8716EE120D0D9B600ACE7D3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1120;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Nick Walter";
 				TargetAttributes = {
+					0B71443723D39380007811B1 = {
+						CreatedOnToolsVersion = 11.2;
+						TestTargetID = B8716EE820D0D9B600ACE7D3;
+					};
 					B8716EE820D0D9B600ACE7D3 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1120;
@@ -210,11 +264,19 @@
 			projectRoot = "";
 			targets = (
 				B8716EE820D0D9B600ACE7D3 /* Octor */,
+				0B71443723D39380007811B1 /* OctorUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0B71443623D39380007811B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8716EE720D0D9B600ACE7D3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,6 +332,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0B71443423D39380007811B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B71443B23D39380007811B1 /* OctorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B8716EE520D0D9B600ACE7D3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,6 +361,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0B71443E23D39380007811B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B8716EE820D0D9B600ACE7D3 /* Octor */;
+			targetProxy = 0B71443D23D39380007811B1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		B8716EF520D0D9B800ACE7D3 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -303,6 +381,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0B71443F23D39380007811B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D2DQD7Z6FZ;
+				INFOPLIST_FILE = OctorUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.whichxjy.OctorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Octor;
+			};
+			name = Debug;
+		};
+		0B71444023D39380007811B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = D2DQD7Z6FZ;
+				INFOPLIST_FILE = OctorUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.3;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.whichxjy.OctorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Octor;
+			};
+			name = Release;
+		};
 		B8716EF920D0D9B800ACE7D3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -460,6 +580,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0B71444123D39380007811B1 /* Build configuration list for PBXNativeTarget "OctorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B71443F23D39380007811B1 /* Debug */,
+				0B71444023D39380007811B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B8716EE420D0D9B600ACE7D3 /* Build configuration list for PBXProject "Octor" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
