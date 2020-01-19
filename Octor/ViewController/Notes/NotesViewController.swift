@@ -71,6 +71,7 @@ class NotesViewController: UIViewController {
   @objc func notesDidUpdate() {
     notesTableView.reloadData()
   }
+
 }
 
 // MARK: - UITableViewDataSource
