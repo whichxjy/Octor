@@ -23,6 +23,7 @@ class TextRecognizer {
     tesseract?.recognize()
     return tesseract?.recognizedText
   }
+
 }
 
 // MARK: - UIImage Extension
